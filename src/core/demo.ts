@@ -20,8 +20,8 @@ export const templates: { [key: string]: Coords[] } = {
   tub: [
     [1, 0],
     [0, 1],
-    [1, 3],
-    [3, 1],
+    [1, 2],
+    [2, 1],
   ],
 };
 
@@ -37,4 +37,4 @@ const play = (state: Coords[]) => {
   }
 };
 // render(templates.blinker);
-// play(templates.blinker);
+play(templates.beacon);

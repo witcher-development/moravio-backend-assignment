@@ -54,7 +54,11 @@ export const nextGameState = (currentGameState: Coords[]) => {
   gameState.forEach((_, key) => {
     const neighbors = getNeighborLocs(key);
     neighbors.forEach((coords) => {
-      if (!gameState.has(coords) && repopulates(coords, gameState)) {
+      if (
+        !gameState.has(coords) &&
+        !repopulated.has(coords) &&
+        repopulates(coords, gameState)
+      ) {
         repopulated.set(coords, null);
       }
     });
