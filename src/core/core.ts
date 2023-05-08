@@ -39,10 +39,12 @@ const repopulates = (coords: EncodedCoords, gameState: GameState) => {
 };
 
 export const nextGameState = (currentGameState: Coords[]) => {
+  // Transform list of live cell coordinates to an easier to use data structure
   const gameState: GameState = new Map(
     currentGameState.map((coords) => [encode(coords), null]),
   );
 
+  // Find live cells surviving to the next state
   const survivors: GameState = new Map();
   gameState.forEach((_, key) => {
     if (survives(key, gameState)) {
@@ -50,6 +52,7 @@ export const nextGameState = (currentGameState: Coords[]) => {
     }
   });
 
+  // Find repopulating dead cells
   const repopulated = new Map();
   gameState.forEach((_, key) => {
     const neighbors = getNeighborLocs(key);
@@ -64,9 +67,11 @@ export const nextGameState = (currentGameState: Coords[]) => {
     });
   });
 
+  // Merge survivors and repopulated cells
   repopulated.forEach((_, coords) => {
     survivors.set(coords, null);
   });
 
+  // Back to initial data format
   return Array.from(survivors.keys()).map(decode);
 };

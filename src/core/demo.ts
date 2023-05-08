@@ -36,5 +36,5 @@ const play = (state: Coords[]) => {
     setTimeout(() => play(next), 300);
   }
 };
-// render(templates.blinker);
-play(templates.beacon);
+
+// play(templates.beacon);
